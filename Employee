@@ -1,0 +1,58 @@
+public class Employee {
+    String name;
+    double salary;//çalışanın maaşı
+    int workHours;
+    int hireYear;
+
+    public Employee(String name, double salary, int workHours, int hireYear) {
+        this.name = name;
+        this.salary = salary;
+        this.workHours = workHours;
+        this.hireYear = hireYear;
+    }
+
+    public double tax() {
+        //çalışanın maaşı <1000tl den az ise vergi uygulanmayacaktır.
+        //çalışanın maaşı >1000tl olursa maaşın %3'ü kadar vergi uygulanacaktır.
+        if (salary < 1000) {
+            return salary;
+        } else {
+            return salary * 0.03;
+        }
+    }
+
+    public double bonus(int workHours) {
+        //çalışma saati 40 saatten fazla olursa saat başına 30tl olacak
+        //şekilde maaşa uygulanacak bonus ücreti hesaplayacak
+
+        if (workHours > 40) {
+            return (workHours - 40) * 30;
+        } else {
+            return 0;
+        }
+    }
+
+    public double raiseSalary(int hireYear) {
+        //Çalışanın işe başlangıç yılına göre maaş artışını hesaplayacaktır.
+        // Şuan ki yılı 2021 olarak alın.
+        if ((hireYear>9)&&(20<hireYear)){
+            return salary*0.10;
+        }else if (hireYear>20){
+            return salary*0.15;
+        }
+
+        return 0;
+    }
+    public void toStrint(){
+        System.out.println("Adı\t: "+name);
+        System.out.println("Maaşı\t: "+salary);
+        System.out.println("Çalışma Saati\t: "+workHours);
+        System.out.println("Başlangıç Yılı\t: "+hireYear);
+        System.out.println("Vergi\t: "+tax());
+        System.out.println("Bonus\t: "+bonus(workHours));
+        System.out.println("Maaş artışı\t: "+raiseSalary(hireYear));
+        System.out.println("Vergi ve bonuslar ile birlikte maaş\t: "+(bonus(workHours)-tax())+salary);
+        System.out.println("Toplam maaş\t: "+(this.salary+raiseSalary(hireYear)));
+    }
+
+}
